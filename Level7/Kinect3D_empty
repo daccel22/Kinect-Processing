@@ -2,7 +2,7 @@ import KinectPV2.*;
 import java.util.*;
 
 KinectPV2 kinect;
-float a,b,c,d,e,f;//varied with circumstance
+float a,b,c,d;//varied with circumstance
 //run Kinect_testRange to get them
 float maxX=1.92;
 float minX=-0.84;
@@ -17,10 +17,7 @@ void setup(){
   
   kinect.init();
   size(1000,1000,P3D);
-  a=500;
-  b=500;
-  c=-500;
-  d=500;
+  calFactor(maxX,minX,maxY,minY);
 }
 
 void draw(){
@@ -40,7 +37,7 @@ void draw(){
   }
      
 }
-//y is in opposite direction
+//3D: y is in opposite direction compared to 2D
 void calFactor(float maxX,float minX,float maxY,float minY){
   a=width/(maxX-minX);
   b=-minX*width/(maxX-minX);
