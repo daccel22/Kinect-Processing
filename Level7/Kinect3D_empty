@@ -2,8 +2,12 @@ import KinectPV2.*;
 import java.util.*;
 
 KinectPV2 kinect;
-float a,b,c,d;//varied with circumstance
-float depth;
+float a,b,c,d,e,f;//varied with circumstance
+//run Kinect_testRange to get them
+float maxX=1.92;
+float minX=-0.84;
+float maxY=1;
+float minY=-0.899;
 
 void setup(){
   background(0);
@@ -12,7 +16,7 @@ void setup(){
   kinect.enableSkeleton3DMap(true);
   
   kinect.init();
-  size(1000,1000);
+  size(1000,1000,P3D);
   a=500;
   b=500;
   c=-500;
@@ -30,11 +34,16 @@ void draw(){
       KJoint[] joints=skeleton.getJoints();
       
       KJoint handR=joints[KinectPV2.JointType_HandRight];
-      depth=handR.getZ();
-      fill(255,0,0);
       ellipse(handR.getX()*a+b,handR.getY()*c+d,100,100);//y is in opposite direction
-      println("Depth: "+depth+" X:"+handR.getX()+" Y: "+handR.getY());//m
+      
     }
   }
      
+}
+//y is in opposite direction
+void calFactor(float maxX,float minX,float maxY,float minY){
+  a=width/(maxX-minX);
+  b=-minX*width/(maxX-minX);
+  c=-height/(maxY-minY);
+  d=-minY*height/(maxY-minY);
 }
