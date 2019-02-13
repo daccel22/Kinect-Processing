@@ -1,5 +1,7 @@
 /*
-  Run this project to get the maxX, minX, maxY, minY
+  Run this program to get the maxX, minX, maxY, minY
+  If you don't want to trace the range of right hand, 
+  you should change the code in line 42
 */
 import java.util.*;
 import KinectPV2.KJoint;
@@ -7,8 +9,6 @@ import KinectPV2.*;
 
 KinectPV2 kinect;
 int count=0;
-int sizeX=500;
-int sizeY=500;
 float maxX=-9999,maxY=-9999;
 float minX=9999,minY=9999;
 
@@ -26,7 +26,7 @@ void setup(){
 void draw(){
   count++;
   fill(random(255),random(255),random(255));
-  ellipse(sizeX/6*count,sizeY/2,50,50);
+  ellipse(width/6*count,height/2,50,50);
   if(count==6){
     background(255);
     count-=6;
