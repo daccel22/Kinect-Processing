@@ -1,0 +1,40 @@
+import KinectPV2.*;
+import java.util.*;
+
+KinectPV2 kinect;
+float a,b,c,d;//varied with circumstance
+float depth;
+
+void setup(){
+  background(0);
+  kinect=new KinectPV2(this);
+  frameRate(200);
+  kinect.enableSkeleton3DMap(true);
+  
+  kinect.init();
+  size(1000,1000);
+  a=500;
+  b=500;
+  c=-500;
+  d=500;
+}
+
+void draw(){
+  background(0);
+  ArrayList<KSkeleton> skeletonArray =kinect.getSkeleton3d();
+  
+  for(int i=0;i<skeletonArray.size();i++){
+    KSkeleton skeleton =(KSkeleton) skeletonArray.get(i);
+    
+    if(skeleton.isTracked()){
+      KJoint[] joints=skeleton.getJoints();
+      
+      KJoint handR=joints[KinectPV2.JointType_HandRight];
+      depth=handR.getZ();
+      fill(255,0,0);
+      ellipse(handR.getX()*a+b,handR.getY()*c+d,100,100);//y is in opposite direction
+      println("Depth: "+depth+" X:"+handR.getX()+" Y: "+handR.getY());//m
+    }
+  }
+     
+}
