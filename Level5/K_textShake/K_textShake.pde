@@ -1,11 +1,15 @@
 /*
   Shake the text with your right hand
+  Background music: Freedom - Beyonce
   When your right hand comes close to the text, it will shake
 */
 
 import java.util.*;
 import KinectPV2.KJoint;
 import KinectPV2.*;
+import processing.sound.*;
+
+SoundFile freedom;
 String str="Shaking!";
 float x,y;//coordinate of the left-most and up-most of the text
 float hx,vy;//half width and half heihgt of the text
@@ -39,9 +43,13 @@ void setup(){
   
   kinect.init();
   calFactor(maxX,minX,maxY,minY);
+  freedom =new SoundFile(this,"Freedom.wav");
+  freedom.play();
 }
 
 void draw(){
+  if(millis()>30000)
+    freedom.stop();
   ArrayList<KSkeleton> skeletonArray =kinect.getSkeletonDepthMap();
   
   for(int i=0;i<skeletonArray.size();i++){
