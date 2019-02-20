@@ -1,10 +1,13 @@
 /*
   Make the text shake with your mouse
+  Background music: Freedom -Beyonce
   Reference to the example on the website of processing
 */
 
 import java.util.*;
+import processing.sound.*;
 
+SoundFile freedom;
 String str="Shaking!";
 float x,y;//coordinate of the text
 float hx,vy;//half width and half heihgt of the text
@@ -25,10 +28,14 @@ void setup(){
   y=height/2;
   keyB=width/12;
   shakeRange=8;
+  freedom =new SoundFile(this,"Freedom.wav");
+  freedom.play();
 }
 void draw(){
   drawPiano();//background
   textShake(mouseX,mouseY,x,y);
+  if(millis()>30000)
+    freedom.stop();
 }
 
 //draw the backgronud
